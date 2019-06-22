@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>test</title>
+<meta charset="utf-8" />
+<style type="text/css">
+.body{/*这里替换为<body>之下的一个容器，其类名为body*/
+	padding: 0;
+	width:400px;
+	height:600px;
+	border: 1px solid green;
+	position: relative;/*本容器相对定位，作为其子孙元素绝对定位时的参考*/
+	overflow:hidden;/*超出本容器的子孙元素隐藏，这个直接作用中<body>元素上会导致无效*/
+}
+
+.add_page_A{
+	position: absolute;/*绝对定位，相对于其非静态定位的祖先元素做绝对定位*/
+	background-color: brown;
+	top:99%;
+	border: 1px solid green;
+}
+
+@keyframes test_A{
+	from{top:99%}
+	to{top:0%}
+}
+
+.add_page_A2{
+	position: relative;/*相对定位*/
+	background-color: brown;
+	top:0%;/*这里的top为0，相当于竖直方向上没有移位，元素位于其本该呆的竖直位置*/
+	border: 1px solid green;
+	animation: test_A 1s;
+	animation-direction: 1;
+}
+
+.hiden_page{
+	display: none;
+}
+
+#add_button{
+	display: block;
+	1position: relative;/*相对定位*/
+	1top:0;
+	1left: 43%;/*你是想通过这种方式居中？还不如用margin属性*/
+	margin:5px auto; /*这样既可实现本按钮居中放置*/
+
+}
+</style>
+</head>
+<body>
+<!-- <div id="show">
+	<ul id="items">
+	</ul>
+</div>
+<div id="summary">
+<p></p>
+</div> -->
+<div class="body">
+<button type="button" id="add_button" onclick="show_add_page()">test</button>
+<div class="add_page_A">
+	<p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p><br>
+	<p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p><br>
+	<p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p><br>
+	<p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p><br>
+	<p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p><br>
+	<p>bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb</p><br>
+</div>
+</div>
+<script>
+	function print(i){
+		console.log(i);
+	}
+	function show_add_page(){
+		var item = document.getElementsByClassName("add_page_A")[0];
+		//item.classList.replace("add_page_A", "add_page_A2");
+		//类名列表的replace方法支持性不好，手机上的UC浏览器就不支持，所以替换为remove和add方法来实现。
+		item.classList.remove("add_page_A");
+		item.classList.add("add_page_A2");
+		// if(getComputedStyle(item,null)['top'] != "700px"){
+		// 	item.classList.add("hiden_page");
+		// }
+		// if(item.style["top"]){}
+	}
+	function change(){
+		var items = document.getElementById("items");
+		var item = document.createElement("li");
+		item.innerText = document.getElementById("money").value;
+		items.appendChild(item)
+
+		var summary = document.getElementById("summary")
+		var p = summary.children[0];
+		p.innerHTML = li_sum();
+
+	}
+	function li_sum(){
+		var items = document.getElementById("items").children;
+		var sum = 0
+		for(i=0;i<items.length;i++){
+			sum += parseInt(items[i].innerHTML)
+		}
+		console.log(sum)
+		return sum
+	}
+	console.log("test")
+</script>
+</body>
+</html>

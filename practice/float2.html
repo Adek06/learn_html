@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>浮动布局</title>
+<meta charset="utf-8" />
+<style type="text/css">
+div[class|="panel"]{
+	width:410px;
+	padding:10px;
+	margin:10px;
+	background-color:green;
+}
+div[class|="panel"]>ul{
+	list-style:none;
+	padding:0;
+	outline:1px dashed red;
+	margin:0 -10px -10px 0;/*外边距：上右下左*/
+}
+div[class|="panel"]>ul::after{
+	content:'.';
+	font-size:0;
+	/*width:0;
+	height:0;
+	overflow:hidden;*/
+	display:block;
+	clear:both;
+}
+div[class|="panel"]>ul>li{
+	1outline:1px dashed green;
+	float:left;
+	outline:1px dotted yellow;
+}
+div[class|="panel"]>ul>li>a{
+	display:block;
+	margin:0 10px 10px 0;
+	1white-space:nowrap;
+	font-size:0;
+}
+div[class|="panel"]>ul>li>a>img{
+	width:100%;
+	1vertical-align:top;/*图像与文本顶对齐，消除图像下方多余的空白间距*/
+}
+div[class|="panel-1"]>ul>li:first-child{
+	width:100%;
+}
+div[class|="panel-5"]>ul>li{
+	width:20%;
+}
+div[class|="panel-5"]>ul>li:last-child{
+	margin-top:-40px;
+}
+.panel-1-2>ul>li:nth-child(n+2){
+	width:50%;
+}
+.panel-1-3>ul>li:nth-child(n+2){
+	width:33.333333%;
+}
+.panel-1-2-3>ul>li:nth-child(n+2):nth-child(-n+3){
+	width:50%;
+}
+.panel-1-2-3>ul>li:nth-child(n+4){
+	width:33.333333%;
+}
+</style>
+</head>
+
+<body>
+<div class="panel-1-2">
+<ul>
+<li><a href="#"><img src="https://img13.360buyimg.com/babel/s350x180_jfs/t1/2882/22/6978/66609/5ba484dfEeccc826f/a1fa7d1b1fb91116.jpg!q90!cc_350x180">你好</a></li>
+<li><a href="#"><img src="https://img11.360buyimg.com/babel/s170x180_jfs/t1/4606/3/6757/80448/5ba33830E7a3f32fb/8e554fa6876d57af.jpg!q90!cc_170x180"></a></li>
+<li><a href="#"><img src="https://img20.360buyimg.com/babel/s170x180_jfs/t27604/223/460220708/73937/217e8c73/5baf3106Ncf82be13.jpg!q90!cc_170x180"></a></li>
+</ul>
+</div>
+<div class="#panel-1-3">
+<ul>
+<li><a href="#"><img src="https://img13.360buyimg.com/babel/s350x180_jfs/t1/2882/22/6978/66609/5ba484dfEeccc826f/a1fa7d1b1fb91116.jpg!q90!cc_350x180"></a></li>
+<li><a href="#"><img src="https://img11.360buyimg.com/babel/s170x180_jfs/t1/4606/3/6757/80448/5ba33830E7a3f32fb/8e554fa6876d57af.jpg!q90!cc_170x180"></a></li>
+<li><a href="#"><img src="https://img20.360buyimg.com/babel/s170x180_jfs/t27604/223/460220708/73937/217e8c73/5baf3106Ncf82be13.jpg!q90!cc_170x180"></a></li>
+<li><a href="#"><img src="https://img11.360buyimg.com/babel/s170x180_jfs/t1/4606/3/6757/80448/5ba33830E7a3f32fb/8e554fa6876d57af.jpg!q90!cc_170x180"></a></li>
+</ul>
+</div>
+<div class="panel-1-2-3">
+<ul>
+<li><a href="#"><img src="https://img13.360buyimg.com/babel/s350x180_jfs/t1/2882/22/6978/66609/5ba484dfEeccc826f/a1fa7d1b1fb91116.jpg!q90!cc_350x180"></a></li>
+<li><a href="#"><img src="https://img11.360buyimg.com/babel/s170x180_jfs/t1/4606/3/6757/80448/5ba33830E7a3f32fb/8e554fa6876d57af.jpg!q90!cc_170x180"></a></li>
+<li><a href="#"><img src="https://img20.360buyimg.com/babel/s170x180_jfs/t27604/223/460220708/73937/217e8c73/5baf3106Ncf82be13.jpg!q90!cc_170x180"></a></li>
+<li><a href="#"><img src="https://img11.360buyimg.com/babel/s170x180_jfs/t1/4606/3/6757/80448/5ba33830E7a3f32fb/8e554fa6876d57af.jpg!q90!cc_170x180"></a></li>
+<li><a href="#"><img src="https://img20.360buyimg.com/babel/s170x180_jfs/t27604/223/460220708/73937/217e8c73/5baf3106Ncf82be13.jpg!q90!cc_170x180"></a></li>
+<li><a href="#"><img src="https://img11.360buyimg.com/babel/s170x180_jfs/t1/4606/3/6757/80448/5ba33830E7a3f32fb/8e554fa6876d57af.jpg!q90!cc_170x180"></a></li>
+</ul>
+</div>
+<div class="panel-5">
+<ul>
+<li><a href="#"><img src="https://img13.360buyimg.com/babel/s350x180_jfs/t1/2882/22/6978/66609/5ba484dfEeccc826f/a1fa7d1b1fb91116.jpg!q90!cc_350x180"></a></li>
+<li><a href="#"><img src="https://img11.360buyimg.com/babel/s170x180_jfs/t1/4606/3/6757/80448/5ba33830E7a3f32fb/8e554fa6876d57af.jpg!q90!cc_170x180"></a></li>
+<li><a href="#"><img src="https://img20.360buyimg.com/babel/s170x180_jfs/t27604/223/460220708/73937/217e8c73/5baf3106Ncf82be13.jpg!q90!cc_170x180"></a></li>
+<li><a href="#"><img src="https://img11.360buyimg.com/babel/s170x180_jfs/t1/4606/3/6757/80448/5ba33830E7a3f32fb/8e554fa6876d57af.jpg!q90!cc_170x180"></a></li>
+<li><a href="#"><img src="https://img20.360buyimg.com/babel/s170x180_jfs/t27604/223/460220708/73937/217e8c73/5baf3106Ncf82be13.jpg!q90!cc_170x180"></a></li>
+<li><a href="#"><img src="https://img11.360buyimg.com/babel/s170x180_jfs/t1/4606/3/6757/80448/5ba33830E7a3f32fb/8e554fa6876d57af.jpg!q90!cc_170x180"></a></li>
+</ul>
+</div>
+</body>
+</html>
