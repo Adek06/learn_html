@@ -87,12 +87,23 @@
 	outline:1px solid yellow;
 	width: 25%;
 }
+
+.li_checked{
+	float:left;
+	outline:1px solid yellow;
+	width: 25%;
+	background:azure;
+}
+
 .item_type>li>a{
 	display:block;
-	margin:0 10px 10px 0;
+	margin:0 10px 10px 20px;
 	font-size:1px;
 }
 
+.item_type>li>a>input{
+	display:none
+}
 
 .num_pannel{
 	position: relative;
@@ -199,11 +210,11 @@
 				<li><input id="input_money"></li>
 			</ul>
 			<ul class="item_type">
-				<li><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="食物" name="item" checked=true>食物</a></li>
-				<li><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="飲料" name="item">飲料</a></li>
-				<li><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="交通" name="item">交通</a></li>
-				<li><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="購物" name="item">購物</a></li>
-				<li><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="測試" name="item">測試</a></li>
+				<li onclick="test(this)" class="li_checked"><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="食物" name="item" checked=true>食物</a></li>
+				<li onclick="test(this)"><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="飲料" name="item">飲料</a></li>
+				<li onclick="test(this)"><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="交通" name="item">交通</a></li>
+				<li onclick="test(this)"><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="購物" name="item">購物</a></li>
+				<li onclick="test(this)"><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="測試" name="item">測試</a></li>
 			</ul>
 			<br>
 			<div class="num_pannel">
@@ -236,6 +247,19 @@
 	function print(i){
 		console.log(i);
 	}
+
+	function test(e){
+		var pa = document.getElementsByClassName("item_type")[0];
+		var items = pa.getElementsByTagName("li")
+		for(var i=0;i<items.length;i++){
+			items[i].classList.remove("li_checked")
+		}
+		var item = e;
+		item.classList.add("li_checked");
+		var r = item.getElementsByTagName("input")[0]
+		r.checked = true;
+	}
+
 	function show_add_page(){
 		var item = document.getElementsByClassName("add_page_A")[0];
 		item.classList.remove("add_page_A");
