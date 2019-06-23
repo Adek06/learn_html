@@ -193,13 +193,13 @@
 		<button type="button" id="add_button" onclick="show_add_page()">記一筆</button>
 		<a id="show_chart_button" onclick="javascript:show_chart_button()"><img src="./left-arrow.png"></a>
 		<div class="add_page_A">
-			<button type="button" onclick="close_add_page()">X</button> <b>今日</b>
+			<button type="button" onclick="close_add_page()">X</button>
 			<ul class="cash_input">
 				<li>花銷</li>
 				<li><input id="input_money"></li>
 			</ul>
 			<ul class="item_type">
-				<li><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="食物" name="item">食物</a></li>
+				<li><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="食物" name="item" checked=true>食物</a></li>
 				<li><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="飲料" name="item">飲料</a></li>
 				<li><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="交通" name="item">交通</a></li>
 				<li><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="購物" name="item">購物</a></li>
@@ -303,20 +303,37 @@
 
 	function change(){
 		var items = document.getElementById("items");
+		
+		var current_date = generate_date_string();
+		var is_new_day=true;
+		
+		items_li = items.getElementsByTagName('li')
+		for(var i=0;i<items_li.length;i++){
+			if(items_li[i].innerHTML==current_date){
+				is_new_day = false;
+				break;
+			}
+		}
+		if (is_new_day){
+			var new_date = document.createElement("li");
+			new_date.innerHTML=current_date;
+			var bar = document.createElement("li");
+			bar.innerHTML="----------------------------------------------";
+			items.appendChild(bar);
+			items.appendChild(new_date);
+		}
 		var item = document.createElement("li");
 		var item_type = get_item_type()
 		var item_cost = document.getElementById("input_money").value
-		item.innerHTML = item_cost+".........."+item_type;
-		items.appendChild(item)
+		item.innerHTML = item_cost+"................."+item_type;
+		items.appendChild(item);
 
-		cost_dir[item_type] += parseInt(item_cost)
-		
-		print(cost_dir)
+		cost_dir[item_type] += parseInt(item_cost);
+		print(cost_dir);
+
 		// var summary = document.getElementById("summary")
 		// var p = summary.children[0];
 		// p.innerHTML = li_sum();
-		
-		// print("to here");
 		close_add_page();
 	}
 	
@@ -359,7 +376,13 @@
 	}
 
 	cost_dir={'食物':0,'飲料':0, '購物':0,'交通':0,'測試':0}
-	cost_list = [cost_dir['食物'], cost_dir['飲料'], cost_dir['購物'], cost_dir['交通']]
-	draw_chart()
+	
+	function generate_date_string(){
+		var curTime = new Date();
+		var day = curTime.getDate();
+		var year = curTime.getFullYear();
+		var month = curTime.getMonth()+1;
+		return year+'-'+month+'-'+day;
+	}
 </script>
 </html>
