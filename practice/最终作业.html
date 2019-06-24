@@ -12,7 +12,7 @@
 	width:400px;
 	height:800px;
 	border: 1px solid green;
-	/* overflow: hidden; */
+	overflow: hidden;
 	position: relative;
 }
 
@@ -23,18 +23,9 @@
 	background-color: brown;
 	top:100%;
 	border: 1px solid green;
-	/* animation: to_add_page_A 0.5s; */
+	animation: to_add_page_A 0.5s;
 }
 
-@keyframes to_add_page_A2{
-	from{top:100%}
-	to{top:0}
-}
-
-@keyframes to_add_page_A{
-	from{top:0%}
-	to{top:100%}
-}
 .add_page_A2{
 	width:400px;
 	height: 800px;
@@ -42,8 +33,19 @@
 	background-color: brown;
 	top:0;
 	border: 1px solid green;
-	/* animation: to_add_page_A2 0.78s; */
+	animation: to_add_page_A2 0.78s;
 }
+
+@keyframes to_add_page_A{
+	from{top:0%}
+	to{top:100%}
+}
+
+@keyframes to_add_page_A2{
+	from{top:100%}
+	to{top:0}
+}
+
 
 .cash_input{
 	padding: 0;
@@ -139,7 +141,7 @@
 }
 .num_pannel>ul>li>a{
 	display:block;
-	margin:0 10px 10px 10px;
+	margin:0 10px 10px 30px;
 	font-size:1px;
 }
 
@@ -165,6 +167,7 @@
 	height: 800px;
 	position: absolute;
 	left:100%;
+	animation: to_show_chart_1 0.75s;
 }
 
 .show_chart_2{
@@ -172,8 +175,19 @@
 	height: 800px;
 	position: absolute;
 	left:0%;
-	background-color: gray;
+	background-color:beige;
+	animation: to_show_chart_2 0.75s;
 	z-index: 2;
+}
+
+@keyframes to_show_chart_2{
+	from{left:100%}
+	to{left:0%}
+}
+
+@keyframes to_show_chart_1{
+	from{left:0%}
+	to{left:100%}
 }
 
 .show_chart_2>a{
