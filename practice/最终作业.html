@@ -12,18 +12,34 @@
 	width:400px;
 	height:800px;
 	border: 1px solid green;
-	/* overflow: hidden; */
+	overflow: hidden;
 	position: relative;
+	background-color: rgb(252,250,242);
 }
 
 .add_page_A{
 	width:400px;
 	height: 800px;
 	position: absolute;
-	background-color: brown;
+	background-color: rgb(252,250,242);
 	top:100%;
 	border: 1px solid green;
-	/* animation: to_add_page_A 0.5s; */
+	animation: to_add_page_A 0.5s;
+}
+
+.add_page_A2{
+	width:400px;
+	height: 800px;
+	position: absolute;
+	background-color: rgb(252,250,242);
+	top:0;
+	border: 1px solid green;
+	animation: to_add_page_A2 0.78s;
+}
+
+@keyframes to_add_page_A{
+	from{top:0%}
+	to{top:100%}
 }
 
 @keyframes to_add_page_A2{
@@ -31,19 +47,6 @@
 	to{top:0}
 }
 
-@keyframes to_add_page_A{
-	from{top:0%}
-	to{top:100%}
-}
-.add_page_A2{
-	width:400px;
-	height: 800px;
-	position: absolute;
-	background-color: brown;
-	top:0;
-	border: 1px solid green;
-	/* animation: to_add_page_A2 0.78s; */
-}
 
 .cash_input{
 	padding: 0;
@@ -59,6 +62,7 @@
 .cash_input>li:first-child{
 	float: left;
 	display: block;
+	color:black;
 }
 .cash_input>li:nth-child(2){
 	float: right;
@@ -69,9 +73,10 @@
 .item_type{
 	list-style:none;
 	padding:0;
-	outline:1px dashed red;
+	loutline:1px dashed red;
 	margin:0 -10px -10px 0;/*外边距：上右下左*/
-	background-color: aqua;
+	background-color: rgb(189,192,186);
+	color:block;
 }
 
 .item_type::after{
@@ -84,15 +89,26 @@
 
 .item_type>li{
 	float:left;
-	outline:1px solid yellow;
+	loutline:1px solid yellow;
 	width: 25%;
 }
+
+.li_checked{
+	float:left;
+	loutline:1px solid yellow;
+	width: 25%;
+	background:rgb(180,165,130);
+}
+
 .item_type>li>a{
 	display:block;
-	margin:0 10px 10px 0;
+	margin:0 10px 10px 20px;
 	font-size:1px;
 }
 
+.item_type>li>a>input{
+	display:none
+}
 
 .num_pannel{
 	position: relative;
@@ -102,9 +118,9 @@
 .num_pannel>ul{
 	list-style:none;
 	padding:0;
-	outline:1px dashed red;
+	loutline:1px dashed red;
 	margin:0 -10px -10px 0;/*外边距：上右下左*/
-	background-color: aqua;
+	background-color: rgb(189,192,186);
 }
 
 .num_pannel>ul::after{
@@ -123,13 +139,12 @@
 } */
 .num_pannel>ul>li{
 	float:left;
-	outline:1px solid yellow;
+	loutline:1px solid yellow;
 	width: 25%;
 }
 .num_pannel>ul>li>a{
 	display:block;
-	margin:0 10px 10px 10px;
-	font-size:1px;
+	margin:2px 10px 10px 30px;
 }
 
 
@@ -153,7 +168,10 @@
 	width:400px;
 	height: 800px;
 	position: absolute;
+	background-color:beige;
 	left:100%;
+	animation: to_show_chart_1 0.75s;
+	z-index: 2;
 }
 
 .show_chart_2{
@@ -161,8 +179,19 @@
 	height: 800px;
 	position: absolute;
 	left:0%;
-	background-color: gray;
+	background-color:beige;
+	animation: to_show_chart_2 0.75s;
 	z-index: 2;
+}
+
+@keyframes to_show_chart_2{
+	from{left:100%}
+	to{left:0%}
+}
+
+@keyframes to_show_chart_1{
+	from{left:0%}
+	to{left:100%}
 }
 
 .show_chart_2>a{
@@ -199,11 +228,11 @@
 				<li><input id="input_money"></li>
 			</ul>
 			<ul class="item_type">
-				<li><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="食物" name="item" checked=true>食物</a></li>
-				<li><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="飲料" name="item">飲料</a></li>
-				<li><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="交通" name="item">交通</a></li>
-				<li><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="購物" name="item">購物</a></li>
-				<li><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="測試" name="item">測試</a></li>
+				<li onclick="test(this)" class="li_checked"><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="食物" name="item" checked=true>食物</a></li>
+				<li onclick="test(this)"><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="飲料" name="item">飲料</a></li>
+				<li onclick="test(this)"><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="交通" name="item">交通</a></li>
+				<li onclick="test(this)"><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="購物" name="item">購物</a></li>
+				<li onclick="test(this)"><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="測試" name="item">測試</a></li>
 			</ul>
 			<br>
 			<div class="num_pannel">
@@ -221,7 +250,7 @@
 					<li><a onclick="javascript:input_nums(3);"><img src="./number-three-in-a-circle.png"></a></li>
 					<li><a onclick="javascript:add_or_min_num('min')"><img src="./minus.png"></a></li>
 					<li><a><img src="./minus.png"></a></a></li>
-					<li><a onclick="javascript:input_nums(0)"><img src="./minus.png"></a></a></li>
+					<li><a onclick="javascript:input_nums(0)"><img src="./number-zero-in-a-circle.png"></a></a></li>
 					<li><a><img src="./minus.png"></a></a></li>
 					<li><a onclick="javascript:change()"><img src="./verified.png"></a></a></li>
 				</ul>
@@ -236,6 +265,19 @@
 	function print(i){
 		console.log(i);
 	}
+
+	function test(e){
+		var pa = document.getElementsByClassName("item_type")[0];
+		var items = pa.getElementsByTagName("li")
+		for(var i=0;i<items.length;i++){
+			items[i].classList.remove("li_checked")
+		}
+		var item = e;
+		item.classList.add("li_checked");
+		var r = item.getElementsByTagName("input")[0]
+		r.checked = true;
+	}
+
 	function show_add_page(){
 		var item = document.getElementsByClassName("add_page_A")[0];
 		item.classList.remove("add_page_A");
@@ -318,7 +360,7 @@
 			var new_date = document.createElement("li");
 			new_date.innerHTML=current_date;
 			var bar = document.createElement("li");
-			bar.innerHTML="----------------------------------------------";
+			bar.innerHTML="-------------------------------------------";
 			items.appendChild(bar);
 			items.appendChild(new_date);
 		}
