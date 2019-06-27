@@ -3,13 +3,15 @@
 <head>
 <title>test</title>
 <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, viewport-fit=cover">
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 <style type="text/css">
 
 .body{
 	padding: 0;
-	width:400px;
+	width:365px;
 	height:800px;
 	border: 1px solid green;
 	overflow: hidden;
@@ -18,24 +20,38 @@
 }
 
 .add_page_A{
-	width:400px;
-	height: 800px;
+	/* width:400px;
+	height: 800px; */
+	width: 100%;
+	height: 100%;
 	position: absolute;
 	background-color: rgb(252,250,242);
 	top:100%;
 	border: 1px solid green;
+	overflow: hidden;
+
 	animation: to_add_page_A 0.5s;
 }
 
 .add_page_A2{
-	width:400px;
-	height: 800px;
+	/* width:400px;
+	height: 800px; */
+	width: 100%;
+	height: 100%;
 	position: absolute;
 	background-color: rgb(252,250,242);
 	top:0;
 	border: 1px solid green;
+	overflow: hidden;
+
 	animation: to_add_page_A2 0.78s;
-<<<<<<< HEAD
+}
+
+.add_page_A2::after{
+	content:'.';
+	font-size:0;
+	display:block;
+	clear:both;
 }
 
 @keyframes to_add_page_A{
@@ -48,20 +64,6 @@
 	to{top:0}
 }
 
-=======
-}
-
-@keyframes to_add_page_A{
-	from{top:0%}
-	to{top:100%}
-}
-
-@keyframes to_add_page_A2{
-	from{top:100%}
-	to{top:0}
-}
-
->>>>>>> 按鈕特效
 
 .cash_input{
 	padding: 0;
@@ -110,15 +112,9 @@
 
 .li_checked{
 	float:left;
-<<<<<<< HEAD
 	loutline:1px solid yellow;
 	width: 25%;
 	background:rgb(180,165,130);
-=======
-	outline:1px solid yellow;
-	width: 25%;
-	background:azure;
->>>>>>> 按鈕特效
 }
 
 .item_type>li>a{
@@ -160,17 +156,11 @@
 } */
 .num_pannel>ul>li{
 	float:left;
-	loutline:1px solid yellow;
 	width: 25%;
 }
 .num_pannel>ul>li>a{
 	display:block;
-<<<<<<< HEAD
-	margin:2px 10px 10px 30px;
-=======
-	margin:0 10px 10px 30px;
-	font-size:1px;
->>>>>>> 按鈕特效
+	margin:0 10px 8px 30px;
 }
 
 
@@ -191,21 +181,22 @@
 }
 
 .show_chart_1{
-	width:400px;
-	height: 800px;
+	/* width:400px;
+	height: 800px; */
+	width: 100%;
+	height: 100%;
 	position: absolute;
 	background-color:beige;
 	left:100%;
 	animation: to_show_chart_1 0.75s;
-<<<<<<< HEAD
 	z-index: 2;
-=======
->>>>>>> 按鈕特效
 }
 
 .show_chart_2{
-	width:400px;
-	height: 800px;
+	/* width:400px;
+	height: 800px; */
+	width: 100%;
+	height: 100%;
 	position: absolute;
 	left:0%;
 	background-color:beige;
@@ -254,7 +245,7 @@
 			<button type="button" onclick="close_add_page()">X</button>
 			<ul class="cash_input">
 				<li>花銷</li>
-				<li><input id="input_money"></li>
+				<li><input id="input_money" placeholder="輸入金額"></li>
 			</ul>
 			<ul class="item_type">
 				<li onclick="test(this)" class="li_checked"><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="食物" name="item" checked=true>食物</a></li>
