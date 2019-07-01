@@ -177,6 +177,19 @@
 	left: 43%;
 }
 
+#edit_button{
+	position: absolute;
+	display: block;
+	top:1%;
+	right: 3%;
+}
+
+.delet_button{
+	/* display: none; */
+	color: red;
+	font-size: 110%;
+}
+
 #show{
 	position: absolute;
 }
@@ -244,6 +257,7 @@
 				<ul id="items"></ul>
 		</div>
 		<br>
+		<button type="button" id="edit_button" onclick="">編輯</button>
 		<button type="button" id="add_button" onclick="show_add_page()">記一筆</button>
 		<a id="show_chart_button" onclick="javascript:show_chart_button()"><img src="./left-arrow.png"></a>
 		<div class="add_page_A">
@@ -322,6 +336,9 @@
 		var item_type;
 		var item_cost;
 		var item;
+		for(var i in cost_dir){
+			cost_dir[i] = 0;
+		}
 		for(var day in spend_detail){
 			for(var i=0;i<spend_detail[day].length;i++){
 				item = spend_detail[day][i]
@@ -330,6 +347,7 @@
 				cost_dir[item_type] += parseInt(item_cost)
 			}
 		}
+		print(cost_dir)
 	}
 
 	cost_dir={'食物':0,'飲料':0, '購物':0,'交通':0,'測試':0}
@@ -422,6 +440,8 @@
 		}
 	}
 
+	spend_detail = new Array();
+
 	function render(){
 		// print(spend_detail)
 		var show_main = document.getElementById("show");
@@ -436,7 +456,10 @@
 				var item_type = item[0];
 				var item_cost = item[1];
 				var li_tree =  document.createElement("li");
-				li_tree.innerHTML = item_cost+"................."+item_type;
+				li_tree.innerHTML = "<a class='delet_button' onclick='javascript:delete_item(this)'>-</a>"+item_cost+"................."+item_type;
+				li_tree.dataset.item_type = item_type;
+				li_tree.dataset.item_cost = item_cost;
+				li_tree.dataset.item_time = day;
 				d.appendChild(li_tree);
 			}
 			show_main.appendChild(d);
@@ -444,7 +467,6 @@
 		}
 	}
 
-	spend_detail = new Array();
 	function change(){
 		var current_date = generate_date_string();
 		var is_new_day = true;
@@ -471,19 +493,31 @@
 		close_add_page();
 	}
 
-	
-	function li_sum(){
-		var items = document.getElementById("items").children;
-		var sum = 0
-		for(i=0;i<items.length;i++){
-			sum += parseInt(items[i].innerHTML)
+	function delete_item(e){
+		var p = e.parentNode;
+		var item_cost = p.dataset.item_cost;
+		var item_type = p.dataset.item_type;
+		var item_time = p.dataset.item_time;
+
+		var arr = spend_detail[item_time];
+		var d_arr = [item_type, item_cost]
+		var index;
+		for(index=0;index<arr.length;index++){
+			if (arr[index].toString() == d_arr.toString()){
+				break
+			}
 		}
-		console.log(sum)
-		return sum
+		// print(arr[0])
+		// var index = arr.indexOf([item_type, item_cost]);
+		// print([item_type, item_cost]==arr[0]);
+		print(index);
+		if (index > -1) {
+			arr.splice(index, 1);
+		}
+		// spend_detail[item_time] = arr;
+		print(spend_detail)
+		render()
 	}
-	console.log("test")
-
-
 	
 	function generate_date_string(){
 		var curTime = new Date();
