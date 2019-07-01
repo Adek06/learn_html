@@ -262,7 +262,7 @@
 			<button type="button" onclick="close_add_page()">X</button>
 			<ul class="cash_input">
 				<li>花銷</li>
-				<li><input id="input_money" placeholder="輸入金額"></li>
+				<li><input id="input_money" placeholder="輸入金額" oninput="value=value.replace(/[^\d]/g,'')"></li>
 			</ul>
 			<ul class="item_type">
 				<li onclick="test(this)" class="li_checked"><a><img src="./ice-cream.png"><input type="radio" class="checkbox" value="食物" name="item" checked=true>食物</a></li>
@@ -523,6 +523,10 @@
 		var item = new Array();
 		var item_type = get_item_type();
 		var item_cost = document.getElementById("input_money").value
+		if(item_cost==''){
+			close_add_page();
+			return
+		}
 		item.push(item_type);
 		item.push(item_cost);
 		
