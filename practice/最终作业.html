@@ -376,7 +376,7 @@
 				labels: type_labels				
 		}
 		var ctx = document.getElementById('myChart').getContext('2d');
-		var myPieChart = new Chart(ctx, {
+		myPieChart = new Chart(ctx, {
 			type: 'pie',
 			data: mydata,
 			options: {}
@@ -417,6 +417,8 @@
 		var item = document.getElementsByClassName("show_chart_2")[0];
 		item.classList.remove("show_chart_2");
 		item.classList.add("show_chart_1");
+		myPieChart.destroy()
+
 	}
 
 	function input_nums(num){
@@ -456,11 +458,25 @@
 		}
 	}
 
+	function get_display_stat(){
+		var t = document.getElementsByClassName("delete_button");
+		print(t)
+		print(t.length)
+		if(t.length==0){
+			return "none"
+		}
+		else{
+			var js_style = window.getComputedStyle(t[0],null);
+			return js_style["display"]
+		}
+	}
+
 	spend_detail = new Array();
 
 	function render(){
 		// print(spend_detail)
 		var show_main = document.getElementById("show");
+		var display_stat = get_display_stat()
 		show_main.innerHTML="";
 		for(var day in spend_detail){
 			var d = document.createElement("ul");
@@ -472,7 +488,7 @@
 				var item_type = item[0];
 				var item_cost = item[1];
 				var li_tree =  document.createElement("li");
-				li_tree.innerHTML = "<a class='delete_button' onclick='javascript:delete_item(this)'><img height=5% width=5% src='./x-button.svg'></a>"+item_cost+"................."+item_type;
+				li_tree.innerHTML = "<a class='delete_button' onclick='javascript:delete_item(this)' style='display:"+display_stat+"'><img height=5% width=5% src='./x-button.svg'></a>"+item_cost+"................."+item_type;
 				li_tree.dataset.item_type = item_type;
 				li_tree.dataset.item_cost = item_cost;
 				li_tree.dataset.item_time = day;
