@@ -90,7 +90,7 @@
 .item_type{
 	list-style:none;
 	padding:0;
-	loutline:1px dashed red;
+	/* loutline:1px dashed red; */
 	margin:0 -10px -10px 0;/*外边距：上右下左*/
 	background-color: rgb(189,192,186);
 	color:block;
@@ -163,6 +163,11 @@
 	margin:0 10px 8px 30px;
 }
 
+/* .num_pannel>ul>li>a>img{
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+	box-shadow:0 5px 20px 10px #0ff; 
+    cursor: pointer;
+} */
 
 
 #add_button{
@@ -312,12 +317,66 @@
 		item.value = "";
 	}
 
+
+	function statistic_cost(){
+		var item_type;
+		var item_cost;
+		var item;
+		for(var day in spend_detail){
+			for(var i=0;i<spend_detail[day].length;i++){
+				item = spend_detail[day][i]
+				item_type = item[0]
+				item_cost = item[1]
+				cost_dir[item_type] += parseInt(item_cost)
+			}
+		}
+	}
+
+	cost_dir={'食物':0,'飲料':0, '購物':0,'交通':0,'測試':0}
+	function draw_chart(){
+		var mydata={
+				datasets: [{
+					data: cost_list,
+					backgroundColor: type_colors
+				}],
+				labels: type_labels				
+		}
+		var ctx = document.getElementById('myChart').getContext('2d');
+		var myPieChart = new Chart(ctx, {
+			type: 'pie',
+			data: mydata,
+			options: {}
+		});
+	}
+
+
 	function show_chart_button(){
 		var item = document.getElementsByClassName("show_chart_1")[0];
 		item.classList.remove("show_chart_1");
 		item.classList.add("show_chart_2");
-		cost_list = [cost_dir['食物'], cost_dir['飲料'], cost_dir['購物'], cost_dir['交通']]
-		draw_chart()
+		statistic_cost();
+		cost_list=[];
+		type_labels=[];
+		for(var i in cost_dir){
+			cost_list.push(cost_dir[i]);
+			type_labels.push(i);
+		}
+		colors = [
+						'rgba(255, 99, 132, 0.2)',
+						'rgba(54, 162, 235, 0.2)',
+						'rgba(255, 206, 86, 0.2)',
+						'rgba(75, 192, 192, 0.2)',
+						'rgba(192, 192, 192, 0.2)',
+						'rgba(75, 75, 192, 0.2)',
+						'rgba(75, 192, 72, 0.2)',
+						'rgba(75, 99, 192, 0.2)',
+						'rgba(75, 162, 192, 0.2)',
+						'rgba(75, 86, 192, 0.2)']
+		type_colors = [];
+		for(var i=0;i<type_labels.length;i++){
+			type_colors.push(colors[i])
+		}
+		draw_chart();
 	}
 
 	function close_chart_button(){
@@ -363,41 +422,55 @@
 		}
 	}
 
+	function render(){
+		// print(spend_detail)
+		var show_main = document.getElementById("show");
+		show_main.innerHTML="";
+		for(var day in spend_detail){
+			var d = document.createElement("ul");
+			var day_date = document.createElement("li");
+			day_date.innerHTML = "-------------------"+day+"-------------------";
+			d.appendChild(day_date);
+			for(var i=0;i<spend_detail[day].length;i++){
+				var item = spend_detail[day][i]
+				var item_type = item[0];
+				var item_cost = item[1];
+				var li_tree =  document.createElement("li");
+				li_tree.innerHTML = item_cost+"................."+item_type;
+				d.appendChild(li_tree);
+			}
+			show_main.appendChild(d);
+			// console.log(spend_detail)
+		}
+	}
+
+	spend_detail = new Array();
 	function change(){
-		var items = document.getElementById("items");
-		
 		var current_date = generate_date_string();
-		var is_new_day=true;
-		
-		items_li = items.getElementsByTagName('li')
-		for(var i=0;i<items_li.length;i++){
-			if(items_li[i].innerHTML==current_date){
-				is_new_day = false;
-				break;
+		var is_new_day = true;
+		for(var k in spend_detail){
+			if(k==current_date){
+				is_new_day = false
+				break
 			}
 		}
-		if (is_new_day){
-			var new_date = document.createElement("li");
-			new_date.innerHTML=current_date;
-			var bar = document.createElement("li");
-			bar.innerHTML="-------------------------------------------";
-			items.appendChild(bar);
-			items.appendChild(new_date);
+		if(is_new_day){
+			var spend_list = new Array();
+		}else{
+			var spend_list = spend_detail[current_date]
 		}
-		var item = document.createElement("li");
-		var item_type = get_item_type()
+		var item = new Array();
+		var item_type = get_item_type();
 		var item_cost = document.getElementById("input_money").value
-		item.innerHTML = item_cost+"................."+item_type;
-		items.appendChild(item);
-
-		cost_dir[item_type] += parseInt(item_cost);
-		print(cost_dir);
-
-		// var summary = document.getElementById("summary")
-		// var p = summary.children[0];
-		// p.innerHTML = li_sum();
+		item.push(item_type);
+		item.push(item_cost);
+		
+		spend_list.push(item);
+		spend_detail[current_date]=spend_list;
+		render();
 		close_add_page();
 	}
+
 	
 	function li_sum(){
 		var items = document.getElementById("items").children;
@@ -410,34 +483,7 @@
 	}
 	console.log("test")
 
-	function draw_chart(){
-		var mydata={
-				datasets: [{
-					data: cost_list,
-					backgroundColor: [
-						'rgba(255, 99, 132, 0.2)',
-						'rgba(54, 162, 235, 0.2)',
-						'rgba(255, 206, 86, 0.2)',
-						'rgba(75, 192, 192, 0.2)']
-				}],
 
-				// These labels appear in the legend and in the tooltips when hovering different arcs
-				labels: [
-					'食物',
-					'飲料',
-					'購物',
-					'交通'
-				]
-			}
-		var ctx = document.getElementById('myChart').getContext('2d');
-		var myPieChart = new Chart(ctx, {
-			type: 'pie',
-			data: mydata,
-			options: {}
-		});
-	}
-
-	cost_dir={'食物':0,'飲料':0, '購物':0,'交通':0,'測試':0}
 	
 	function generate_date_string(){
 		var curTime = new Date();
