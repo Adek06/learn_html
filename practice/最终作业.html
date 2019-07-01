@@ -180,7 +180,7 @@
 #edit_button{
 	position: absolute;
 	display: block;
-	top:1%;
+	top:0%;
 	right: 3%;
 }
 
@@ -288,7 +288,7 @@
 					<li><a onclick="javascript:add_or_min_num('min')"><img src="./minus.png"></a></li>
 					<li><a><img src="./minus.png"></a></a></li>
 					<li><a onclick="javascript:input_nums(0)"><img src="./number-zero-in-a-circle.png"></a></a></li>
-					<li><a><img src="./minus.png"></a></a></li>
+					<li><a onclick="javascript:input_nums(-1);"><img src="./record-circular-button.png"></a></a></li>
 					<li><a onclick="javascript:change()"><img src="./verified.png"></a></a></li>
 				</ul>
 			</div> 
@@ -422,6 +422,13 @@
 	}
 
 	function input_nums(num){
+		if(num == -1){
+			var item = document.getElementById("input_money");
+			var cur_num = item.value;
+			var new_num = String(cur_num)+".";
+			item.value = new_num;
+			return 
+		}
 		var item = document.getElementById("input_money");
 		var cur_num = item.value;
 		var new_num = String(cur_num)+num;
