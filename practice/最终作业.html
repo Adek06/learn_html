@@ -184,10 +184,8 @@
 	right: 3%;
 }
 
-.delet_button{
-	/* display: none; */
-	color: red;
-	font-size: 110%;
+.delete_button{
+	display: none;
 }
 
 #show{
@@ -257,7 +255,7 @@
 				<ul id="items"></ul>
 		</div>
 		<br>
-		<button type="button" id="edit_button" onclick="">編輯</button>
+		<button type="button" id="edit_button" onclick="switch_show_hiden()">編輯</button>
 		<button type="button" id="add_button" onclick="show_add_page()">記一筆</button>
 		<a id="show_chart_button" onclick="javascript:show_chart_button()"><img src="./left-arrow.png"></a>
 		<div class="add_page_A">
@@ -304,6 +302,24 @@
 	function print(i){
 		console.log(i);
 	}
+
+	function switch_show_hiden(){
+		var t = document.getElementsByClassName("delete_button");
+		var js_style = window.getComputedStyle(t[0],null);
+		var but = document.getElementById("edit_button");
+		if(js_style["display"]=='none'){
+			for(var i=0;i<t.length;i++){
+				t[i].style.display='inline'
+			}
+			but.innerHTML="完成"
+		}else if(js_style["display"]=='inline'){
+			for(var i=0;i<t.length;i++){
+				t[i].style.display='none'
+			}
+			but.innerHTML="編輯"
+		}
+	}
+	
 
 	function test(e){
 		var pa = document.getElementsByClassName("item_type")[0];
@@ -456,7 +472,7 @@
 				var item_type = item[0];
 				var item_cost = item[1];
 				var li_tree =  document.createElement("li");
-				li_tree.innerHTML = "<a class='delet_button' onclick='javascript:delete_item(this)'>-</a>"+item_cost+"................."+item_type;
+				li_tree.innerHTML = "<a class='delete_button' onclick='javascript:delete_item(this)'><img height=5% width=5% src='./x-button.svg'></a>"+item_cost+"................."+item_type;
 				li_tree.dataset.item_type = item_type;
 				li_tree.dataset.item_cost = item_cost;
 				li_tree.dataset.item_time = day;
@@ -526,5 +542,7 @@
 		var month = curTime.getMonth()+1;
 		return year+'-'+month+'-'+day;
 	}
+
+
 </script>
 </html>

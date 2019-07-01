@@ -1,0 +1,36 @@
+<html>
+    <head></head>
+    <body>
+        <div data-test="test2" id="div"></div>
+    </body>
+    <script>
+
+        cost_dir={'食物':0,'飲料':0, '購物':0,'交通':0,'測試':0}
+        test_array = new Array;
+
+        function change(){
+            // var current_date = generate_date_string();
+            // var is_new_day = true;
+            test_array.push(["test",123]);
+            console.log(test_array)
+        }
+
+        function test(){
+            var i = document.getElementById("div");
+            
+            console.log(i.dataset.test)
+        }
+        function delete_item(){
+            var arr = [5, 15, 110, 210, 550];
+            var index = arr.indexOf(210);
+            if (index > -1) {
+                arr.splice(index, 1);
+            }
+        }
+        test()
+        change()
+        delete_item()
+    </script>
+
+    
+</html>
